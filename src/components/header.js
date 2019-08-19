@@ -14,12 +14,16 @@ import React, { Component } from 'react';
 class Header extends Component{
 
   state ={
-    keywords:'',
+    active:'active',
+    keywords:''
   };
 
 
   inputChange(event){
+    const value = event.target.value === ''? 'not-active':'active';
+
     this.setState({
+      active:value,
       keywords: event.target.value
     })
 
@@ -30,11 +34,13 @@ class Header extends Component{
   render(){
 
     console.log(this.state);
+    console.log(this.props.keywords);
 
     return(
-    <header>
+    //<header style={{background:`${this.state.active ? 'red' : 'blue'}`}}>
+    <header className={this.state.active}>
       <div className="logo">Logo</div>
-      <input onChange={(event)=>this.inputChange(event)}/>
+      <input onChange={(event)=>this.props.keywords(event)}/>
       <div>{this.state.keywords}</div>
     </header>
 
